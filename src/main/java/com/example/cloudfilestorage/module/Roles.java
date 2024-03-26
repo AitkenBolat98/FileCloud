@@ -1,4 +1,5 @@
 package com.example.cloudfilestorage.module;
 
-public class Role {
+public class Roles {
+
 }
