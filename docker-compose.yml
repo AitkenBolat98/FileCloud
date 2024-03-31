@@ -8,19 +8,19 @@ services:
     restart: always
     ports:
       - '5555:5000'
-
-
   mysql:
     image: mysql
     restart: always
     environment:
-      MYSQL_DATABASE: cloud
-      MYSQL_PASSWORD: 1998
-      MYSQL_ROOT_PASSWORD: 3101
-      MYSQL_USER: user
-
-  adminer:
-    image: adminer
-    restart: always
+      MYSQL_DATABASE: "cloud"
+      MYSQL_PASSWORD: "3101"
+      MYSQL_ROOT_PASSWORD: "3101"
+      MYSQL_USER: "user"
     ports:
-      - '8888:8080'
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql:/var/lib/mysql
+volumes:
+  mysql:
