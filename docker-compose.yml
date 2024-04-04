@@ -1,26 +1,13 @@
 version: "3"
 
 services:
-  api:
-    build:
-      context: .
-      dockerfile: dockerfile
-    restart: always
-    ports:
-      - '5555:5000'
-  mysql:
-    image: mysql
+  postgres:
+    image: postgres:15
     restart: always
     environment:
-      MYSQL_DATABASE: "cloud"
-      MYSQL_PASSWORD: "3101"
-      MYSQL_ROOT_PASSWORD: "3101"
-      MYSQL_USER: "user"
+      POSTGRES_DB: cloud
+      POSTGRES_USER: cloud_user
+      POSTGRES_PASSWORD: cloud_password
     ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - mysql:/var/lib/mysql
-volumes:
-  mysql:
+      - 5432
+
