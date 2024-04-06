@@ -1,7 +1,6 @@
 package com.example.cloudfilestorage.service;
 
 import com.example.cloudfilestorage.dto.UserDTO;
-import com.example.cloudfilestorage.module.Role;
 import com.example.cloudfilestorage.module.User;
 import com.example.cloudfilestorage.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
+
     private final UserRepository userRepository;
 
     @Override

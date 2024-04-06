@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/cloud
+    username: postgres
+    password: 3101
+  jpa:
+    show-sql: true

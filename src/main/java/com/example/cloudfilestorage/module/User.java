@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
+@Table(name = "users")
 @Data
 @Getter
 @AllArgsConstructor
@@ -14,13 +17,19 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true,nullable = false)
-    private String email;
+    private Integer id;
 
+    @Column()
+    private String username;
+
+    @Column
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany
+    @JoinTable(name = "user_authorities",
+    joinColumns = @JoinColumn(name = "id_user"),
+    inverseJoinColumns = @JoinColumn(name = "id_authority"))
+    private List<Authority> authorities;
+
 
 }

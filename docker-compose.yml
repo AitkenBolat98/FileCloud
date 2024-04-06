@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       POSTGRES_DB: cloud
-      POSTGRES_USER: cloud_user
-      POSTGRES_PASSWORD: cloud_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 3101
     ports:
-      - 5432
+      - "5433:5432"
 
