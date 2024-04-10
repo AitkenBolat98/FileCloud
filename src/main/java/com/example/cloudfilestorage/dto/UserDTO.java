@@ -1,16 +1,16 @@
 package com.example.cloudfilestorage.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class UserDTO {
-    private String firstName;
 
-    private String lastName;
-
+    private String username;
     private String password;
-    private String matchingPassword;
-
-    private String email;
 
 }

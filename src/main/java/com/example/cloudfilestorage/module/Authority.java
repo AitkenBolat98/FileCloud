@@ -15,8 +15,8 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column()
-    private String authority;
+    @Column(name = "authority")
+    private String name;
 
 
 }

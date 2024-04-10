@@ -1,6 +1,9 @@
 package com.example.cloudfilestorage.module;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -19,10 +22,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column()
+    @Column(unique = true)
+    @NotBlank
+    @Size(min = 4,max = 100)
     private String username;
 
     @Column
+    @NotBlank
+    @Size(min = 6)
     private String password;
 
     @ManyToMany
