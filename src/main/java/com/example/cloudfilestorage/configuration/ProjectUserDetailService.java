@@ -23,7 +23,7 @@ public class ProjectUserDetailService implements UserDetailsService {
                         .username(user.getUsername())
                         .password(user.getPassword())
                         .authorities(user.getAuthorities().stream()
-                                .map(Authority:: getAuthority)
+                                .map(Authority::getName)
                                 .map(SimpleGrantedAuthority:: new)
                                 .toList())
                         .build()).orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(username)));

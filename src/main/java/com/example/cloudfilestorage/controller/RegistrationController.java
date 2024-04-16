@@ -29,4 +29,5 @@ public class RegistrationController {
         }
         return "redirect:/api/main";
     }
+
 }

@@ -1,6 +1,5 @@
 package com.example.cloudfilestorage.configuration;
 
-import com.example.cloudfilestorage.dto.UserDTO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +13,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(authorize ->{
-            authorize.requestMatchers("/main","/main/registration","/main/login")
+            authorize.requestMatchers("/api/main","/api/main/registration","/api/main/login," ,"/api/registration")
                     .permitAll().anyRequest().authenticated();});
         return http.build();
     }

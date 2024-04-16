@@ -8,6 +8,7 @@ import com.example.cloudfilestorage.repository.AuthorityRepository;
 import com.example.cloudfilestorage.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
@@ -26,10 +28,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public User registerNewUser(UserDTO userDTO) {
         User user = new User();
-        authorityRepository.findAuthorityByName("USER");
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setAuthorities();
+        List<Authority> authorityList = new ArrayList<>();
+        try {
+            Authority authority = authorityRepository.findAuthorityByName("USER");
+            authorityList.add(authority);
+            user.setUsername(userDTO.getUsername());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setAuthorities(authorityList);
+        }catch (Exception e){
+            log.error("registerNewUser Exception " + e);
+        }
+
         return userRepository.save(user);
     }
 
