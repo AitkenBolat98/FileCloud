@@ -4,5 +4,21 @@
 </head>
 <body>
 <h1>Registration</h1>
+    <form method="post" th:object="${user}">
+    <label for="username">Enter username
+        <input id="username" type="text" name="username" th:field="*{username}" required>
+    </label>
+    <label for="password">Enter password
+        <input id="password" type="password" name="password" th:field="*{password}" required>
+    </label>
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message">Invalid username</p>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message">Invalid password</p>
+
+        <p th:if="${registrationValidationError}" class="error-message" th:text="${registrationValidationError}"></p>
+        <p th:if="${registrationUserError}" class="error-message" th:text="${registrationUserError}"></p>
+
+        <input type="submit" value="Submit">
+</form>
+
 </body>
 </html>

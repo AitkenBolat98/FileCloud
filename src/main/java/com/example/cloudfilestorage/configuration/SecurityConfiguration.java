@@ -12,13 +12,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests(authorize ->{
-            authorize.requestMatchers("/api/main","/api/main/registration","/api/main/login," ,"/api/registration")
+        http.csrf(httpSecurityCsrfConfigurer -> {httpSecurityCsrfConfigurer.disable();})
+                .authorizeHttpRequests(authorize ->{
+            authorize.requestMatchers("/api/main","/api/main/registration","/api/main/login,")
                     .permitAll().anyRequest().authenticated();});
         return http.build();
     }
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(12);
     }
 

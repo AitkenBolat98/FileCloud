@@ -1,7 +1,6 @@
 package com.example.cloudfilestorage.service;
 
-import com.example.cloudfilestorage.configuration.SecurityConfiguration;
-import com.example.cloudfilestorage.dto.UserDTO;
+import com.example.cloudfilestorage.dto.UserRegistrationDTO;
 import com.example.cloudfilestorage.module.Authority;
 import com.example.cloudfilestorage.module.User;
 import com.example.cloudfilestorage.repository.AuthorityRepository;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -23,10 +23,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
     @Override
-    public User registerNewUser(UserDTO userDTO) {
+    public User registerNewUser(UserRegistrationDTO userDTO) {
         User user = new User();
         List<Authority> authorityList = new ArrayList<>();
         try {
@@ -41,5 +41,15 @@ public class UserServiceImpl implements UserService{
 
         return userRepository.save(user);
     }
+    @Override
+    public boolean isUserExist(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+
 
 }
