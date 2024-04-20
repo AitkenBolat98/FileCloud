@@ -23,7 +23,6 @@ public class RegistrationController {
     public String registrationNewUser(@Valid UserRegistrationDTO userDTO,
                                       BindingResult bindingResult,Model model)
         throws Exception{
-        System.out.println("ssdsadasdadadasdas");
         if(bindingResult.hasErrors()){
             model.addAttribute("registrationValidationError","VALIDATION ERROR");
         }else {

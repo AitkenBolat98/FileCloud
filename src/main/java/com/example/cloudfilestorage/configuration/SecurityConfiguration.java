@@ -12,10 +12,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http.csrf(httpSecurityCsrfConfigurer -> {httpSecurityCsrfConfigurer.disable();})
+        http
+                .csrf(httpSecurityCsrfConfigurer -> {httpSecurityCsrfConfigurer.disable();})
                 .authorizeHttpRequests(authorize ->{
-            authorize.requestMatchers("/api/main","/api/main/registration","/api/main/login,")
-                    .permitAll().anyRequest().authenticated();});
+                    authorize.requestMatchers("/api/main","/api/main/registration","/api/main/login")
+                    .permitAll().anyRequest().authenticated();})
+                .formLogin(form -> form
+                        .loginPage("/api/main/login")
+                        .loginProcessingUrl("/api/main/login")
+                        .defaultSuccessUrl("/api/main",true)
+                        .permitAll());
         return http.build();
     }
     @Bean

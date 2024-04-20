@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UserRegistrationDTO {
+
     @NotBlank
     private String username;
     @NotBlank
