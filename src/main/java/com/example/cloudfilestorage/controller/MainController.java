@@ -1,11 +1,16 @@
 package com.example.cloudfilestorage.controller;
 
+import com.example.cloudfilestorage.configuration.ProjectUserDetailService;
+import com.example.cloudfilestorage.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -13,8 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 public class MainController {
 
+    private final ProjectUserDetailService userDetailService;
+    private final UserService userService;
+
     @GetMapping
-    public String getMainPage(){
+    public String getMainPage(Model model, Principal principal){
+        if(principal != null){
+            String username = principal.getName();
+            if(userService.isUserExist(username)){
+                model.addAttribute("isAuthorized",true);
+            }
+        }
         return "main";
     }
 

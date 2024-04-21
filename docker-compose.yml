@@ -10,4 +10,13 @@ services:
       POSTGRES_PASSWORD: 3101
     ports:
       - "5433:5432"
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ROOT_USER: cloud
+      MINIO_ROOT_PASSWORD: 123456789
+
 

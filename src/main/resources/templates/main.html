@@ -3,11 +3,11 @@
     <title>Main Page</title>
 </head>
 <body>
-<!--<div th:if="${userAuthorized}">
+<div th:if="${isAuthorized}">
     <p>Welcome</p>
-    <a href="logout">logout</a>
-</div>-->
-<div>
+    <a href="/api/main/logout">logout</a>
+</div>
+<div th:unless="${isAuthorized}">
     <p><a href="/api/main/registration">registration</a></p>
     <p><a href="/api/main/login">authorization</a> </p>
 </div>
