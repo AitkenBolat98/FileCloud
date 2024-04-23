@@ -1,6 +1,5 @@
 package com.example.cloudfilestorage.controller;
 
-import com.example.cloudfilestorage.configuration.ProjectUserDetailService;
 import com.example.cloudfilestorage.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,7 +17,6 @@ import java.security.Principal;
 @Log4j2
 public class MainController {
 
-    private final ProjectUserDetailService userDetailService;
     private final UserService userService;
 
     @GetMapping
