@@ -5,3 +5,8 @@ spring:
     password: 3101
   jpa:
     show-sql: true
+minio:
+  bucket: ${MINIO_BUCKET}
+  url: ${MINIO_URL}
+  accessKey: ${MINIO_ACCESS_KEY}
+  secretKey: ${MINIO_SECRET_KEY}

@@ -1,21 +1,21 @@
 package com.example.cloudfilestorage.configuration;
 
+import com.example.cloudfilestorage.properties.MinioProperties;
 import io.minio.MinioClient;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class MinioConfiguration {
-    private final String endPoint = "https://play.min.io";
-    private final String accessKey = "cloud";
-
-    private final String secretKey = "123456789";
+    private final MinioProperties minioProperties;
     @Bean
     public MinioClient minioClient(){
         return MinioClient
                 .builder()
-                .endpoint(endPoint)
-                .credentials(accessKey,secretKey)
+                .endpoint(minioProperties.getUrl())
+                .credentials(minioProperties.getAccessKey(), minioProperties.getSecretKey())
                 .build();
     }
 }
