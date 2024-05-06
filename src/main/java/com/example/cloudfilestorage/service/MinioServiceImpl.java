@@ -55,6 +55,9 @@ public class MinioServiceImpl implements MinioService{
 
 
     }
+/*    public void createDirectory(String ){
+
+    }*/
 
     @Override
     public void uploadFile(String path, @NotNull MultipartFile multipartFile) {

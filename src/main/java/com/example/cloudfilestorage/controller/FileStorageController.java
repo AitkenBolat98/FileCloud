@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api/main/storage")
+@RequestMapping("/api/main/storage/")
 @Log4j2
 public class FileStorageController {
 
@@ -24,12 +24,13 @@ public class FileStorageController {
     public String getStoragePage(Model model){
         return "storage";
     }
-    @PostMapping("/upload")
+/*    @PostMapping("")
     public String uploadFile(FileUploadDto fileUploadDto, HttpSession session){
         MultipartFile file = fileUploadDto.getFile();
-        minioService.uploadFile(session.get);
+        minioService.uploadFile();
+    }*/
 
-    }
+    @PostMapping()
     private static String getPath(HttpSession session){
         return (String) session.getAttribute("path");
     }
