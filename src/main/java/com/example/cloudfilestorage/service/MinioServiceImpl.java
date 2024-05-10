@@ -41,10 +41,10 @@ public class MinioServiceImpl implements MinioService{
         }
     }
 
-    private void createBucket(String path) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+    public void createBucket(String path) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         boolean exist = minioClient.bucketExists(BucketExistsArgs
                 .builder()
-                .bucket(minioProperties.getBucket())
+                .bucket(path)
                 .build());
         if(!exist){
             minioClient.makeBucket(MakeBucketArgs
@@ -53,11 +53,21 @@ public class MinioServiceImpl implements MinioService{
                     .build());
         }
 
-
     }
-/*    public void createDirectory(String ){
+    @Override
+    public void createMinioDirectory(String path ){
+        try {
+            if (!minioClient.bucketExists(BucketExistsArgs
+                    .builder()
+                    .bucket(path)
+                    .build())) {
+                createBucket(path);
+            }
 
-    }*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void uploadFile(String path, @NotNull MultipartFile multipartFile) {

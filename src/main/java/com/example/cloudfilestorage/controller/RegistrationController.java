@@ -3,6 +3,7 @@ package com.example.cloudfilestorage.controller;
 
 import com.example.cloudfilestorage.dto.UserRegistrationDTO;
 import com.example.cloudfilestorage.module.User;
+import com.example.cloudfilestorage.service.StorageService;
 import com.example.cloudfilestorage.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class RegistrationController {
     private final UserService userService;
+    private final StorageService storageService;
     @PostMapping()
     public String registrationNewUser(@Valid UserRegistrationDTO userDTO,
                                       BindingResult bindingResult,Model model)
@@ -28,6 +30,7 @@ public class RegistrationController {
         }else {
             if(!userService.isUserExist(userDTO.getUsername())){
                 User user = this.userService.registerNewUser(userDTO);
+                storageService.createInitialBucketForUser(user.getUsername());
                 model.addAttribute("user",userDTO);
             }else {
                 model.addAttribute("registrationUserError","USER ALREADY EXIST");

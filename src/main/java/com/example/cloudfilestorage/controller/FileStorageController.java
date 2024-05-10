@@ -2,6 +2,7 @@ package com.example.cloudfilestorage.controller;
 
 import com.example.cloudfilestorage.dto.FileUploadDto;
 import com.example.cloudfilestorage.service.MinioService;
+import com.example.cloudfilestorage.service.StorageService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -12,27 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/api/main/storage/")
 @Log4j2
 public class FileStorageController {
 
-    private final MinioService minioService;
-
+    private final StorageService storageService;
     @GetMapping()
     public String getStoragePage(Model model){
         return "storage";
     }
-/*    @PostMapping("")
-    public String uploadFile(FileUploadDto fileUploadDto, HttpSession session){
-        MultipartFile file = fileUploadDto.getFile();
-        minioService.uploadFile();
-    }*/
-
-    @PostMapping()
-    private static String getPath(HttpSession session){
-        return (String) session.getAttribute("path");
+   @PostMapping("uploadFile")
+    public String uploadFile(FileUploadDto fileUploadDto, Principal principal){
+        String username = principal.getName();
     }
+    @PostMapping("createDirectory")
+    public String createDirectory(){
+
+    }
+
+
 
 }

@@ -11,7 +11,8 @@ public interface MinioService {
 
     void createAppBucket();
 
-
+    void createMinioDirectory(String path);
+    void createBucket(String path) throws InsufficientDataException, ErrorResponseException, ServerException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
 
     void uploadFile(String path, MultipartFile multipartFile);
 
