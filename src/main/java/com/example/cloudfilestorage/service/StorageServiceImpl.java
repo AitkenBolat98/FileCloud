@@ -27,12 +27,22 @@ public class StorageServiceImpl implements StorageService {
 
 
     @Override
-    public void uploadFile(String path, MultipartFile multipartFile) {
+    public void uploadFile(String fileName,String directoryName,String userName, MultipartFile multipartFile) {
+        User user = userService.getUserByUsername(userName);
+        String userId = Base64.getEncoder().encodeToString(String.valueOf(user.getId()).getBytes());
+        String userPath = "user-" + userId + "-files";
+        String directoryPath = userPath + "/" + directoryName;
+        String filename = directoryPath + "/" + fileName;
+        minioService.uploadFile(fileName,multipartFile);
 
     }
 
     @Override
-    public void createDirectory(String directoryName) {
-
+    public void createDirectory(String directoryName,String userName) {
+        User user = userService.getUserByUsername(userName);
+        String userId = Base64.getEncoder().encodeToString(String.valueOf(user.getId()).getBytes());
+        String userPath = "user-" + userId + "-files";
+        String directoryPath = userPath + "/" + directoryName;
+        minioService.createMinioDirectory(directoryPath);
     }
 }
