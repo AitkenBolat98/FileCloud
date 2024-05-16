@@ -6,8 +6,7 @@ spring:
   jpa:
     show-sql: true
 minio:
-  bucket: cloudfilestorage
-  url: https://play.min.io
+  bucket: files-bucket
+  url: http://localhost:9000
   accessKey: cloud
   secretKey: 123456789
-
